@@ -1,0 +1,37 @@
+name: GuiShopRecoded
+main: ru.blc.guishop.GuiShopRecoded
+description: Just shop with gui for your server
+version: 1.4
+author: Blc_Dragon
+website: https://dev.bukkit.org/projects/guishop-recoded
+softdepend: [Vault]
+
+commands:
+  shop: 
+    usage: /<command>
+    description: 'Open shop'
+permissions:
+  shop.use:
+    description: 'Gives acces to command /shop'
+    default: op
+  shop.gamemode:
+    description: 'Allow you to use shop in creative mode'
+    default: op
+  shop.reload:
+    description: 'Gives acces to command /shop reload'
+    default: op
+  shop.buy:
+    description: 'Allow you to use buy-menu in shop'
+    default: op
+  shop.sell:
+    description: 'Allow you to use sell-menu in shop'
+    default: op
+  shop.tab.*:
+    description: 'Gives acces to all tabs in buy\sell menu'
+    default: op
+  shop.vip.*:
+    description: 'Gives acces to all vip menus'
+    default: op
+  shop.setsale:
+    description: 'It allows you to set a sale'
+    default: op

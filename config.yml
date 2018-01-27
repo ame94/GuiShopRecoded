@@ -1,0 +1,16 @@
+#Gui Shop Recoded
+#default config
+
+#name of language file
+lang: 'en_US'
+#prefix of your shop menu
+UseTabPrefix: true
+TabPrefix: '&8[&aShop&8]'
+#prefix setups
+UseMessagePrefix: true
+Prefix: '&8[&aShop&8]'
+
+#Logging
+LogInfo: true
+LogFileName: log
+LogToConsole: false
