@@ -146,7 +146,7 @@ public class Tab {
                     lore.addAll(item.getItemMeta().getLore());
                 }
 
-                lore.add(SU.genStrng(Phrases.valueOf("PressTo" + sType).getMessage()));
+                lore.add(SU.genStrng(Phrases.valueOf("PressTo" + sType).getMessage() + " (" + s +")"));
                 if(!vip) {
                     lore.add(SU.genStrng(Phrases.valueOf(sType + "Cost").builder().replaceVar(Vars.COST, Double.toString(config.getDouble(s + "." + sType + "Price"))).buildMessage()));
                     lore.add(SU.genStrng(Phrases.valueOf(sType + "Cost16").builder().replaceVar(Vars.COST, Double.toString(config.getDouble(s + "." + sType + "Price") * 16.0D)).buildMessage()));

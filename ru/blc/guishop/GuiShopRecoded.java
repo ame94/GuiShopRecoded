@@ -23,6 +23,8 @@ public class GuiShopRecoded extends JavaPlugin {
     protected static FileConfiguration tabs;
     private boolean currentlystarted = false;
     private ShopLogger logger = null;
+    private static String pluginDataFolder;
+    public static String getPluginDataFolder() { return pluginDataFolder; }
 
     public GuiShopRecoded() {
     }
@@ -67,6 +69,7 @@ public class GuiShopRecoded extends JavaPlugin {
 
                 GUI.createShop();
                 this.currentlystarted = true;
+                pluginDataFolder = this.getDataFolder().getAbsolutePath();
             }
         }
     }

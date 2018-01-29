@@ -23,6 +23,10 @@ public class GUI {
     private static List<Tab> tabs = new ArrayList();
     private static List<Tab> vipTabs = new ArrayList();
 
+    public static List<Tab> getTabs() {
+        return tabs;
+    }
+
     public GUI() {
     }
 

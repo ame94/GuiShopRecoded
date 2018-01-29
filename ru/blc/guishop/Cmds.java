@@ -1,20 +1,22 @@
 package ru.blc.guishop;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import ru.blc.guishop.gui.GUI;
 import ru.blc.guishop.gui.Tab;
 import ru.blc.guishop.lang.Phrases;
 import ru.blc.guishop.lang.Phrases.Vars;
+import ru.blc.guishop.utils.ConfigUtil;
 import ru.blc.guishop.utils.SU;
 
 public class Cmds implements CommandExecutor {
@@ -106,12 +108,30 @@ public class Cmds implements CommandExecutor {
                 break;
             case 4:
                 if(args[0].equalsIgnoreCase("setprice")) {
-                    sender.sendMessage("Called setprice!");
-
-                    Tab tab = Tab.getTab(args[1].replace("_", " "));
-
-
-
+                    FileConfiguration rootLevel = ConfigUtil.loadYaml(GuiShopRecoded.instance(), "tabs");
+                    Set<String> categoryList = rootLevel.getKeys(false);
+                    for (String categoryElement : categoryList) {
+                        //sender.sendMessage("Checking " + categoryElement);
+                        FileConfiguration category = ConfigUtil.loadYaml(GuiShopRecoded.instance(), "tabs" + File.separator + categoryElement);
+                        if (category != null) {
+                            if (category.contains(args[1] + ".BuyPrice")) {
+                                double priceBuy = category.getDouble(args[1] + ".BuyPrice");
+                                double priceSell = category.getDouble(args[1] + ".SellPrice");
+                                category.set(args[1] + ".BuyPrice", new Double(args[2]));
+                                category.set(args[1] + ".SellPrice", new Double(args[3]));
+                                try {
+                                    //PrintWriter out = new PrintWriter("tabs" + File.separator + categoryElement);
+                                    PrintWriter out = new PrintWriter(GuiShopRecoded.getPluginDataFolder() + File.separator + "tabs" + File.separator + categoryElement + ".yml");
+                                    out.println(category.saveToString());
+                                    out.close();
+                                    sender.sendMessage("§aUpdated " + args[1] + ": Buy $" + args[2] + ", Sell $" + args[3]);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                break;
+                            }
+                        }
+                    }
                     return true;
                 }
 
