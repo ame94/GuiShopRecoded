@@ -1,7 +1,7 @@
 name: GuiShopRecoded
 main: ru.blc.guishop.GuiShopRecoded
 description: Just shop with gui for your server
-version: 1.4
+version: 1.5a
 author: Blc_Dragon
 website: https://dev.bukkit.org/projects/guishop-recoded
 softdepend: [Vault]
@@ -34,4 +34,7 @@ permissions:
     default: op
   shop.setsale:
     description: 'It allows you to set a sale'
+    default: op
+  shop.setprice:
+    description: 'Sets the buy and sell price for an item'
     default: op

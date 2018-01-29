@@ -107,11 +107,15 @@ public class Cmds implements CommandExecutor {
                 }
                 break;
             case 4:
+                boolean found = false;
                 if(args[0].equalsIgnoreCase("setprice")) {
+                    if(!sender.hasPermission("shop.setprice")) {
+                        sender.sendMessage(SU.genMessage(Phrases.NoPermission.getMessage()));
+                        return true;
+                    }
                     FileConfiguration rootLevel = ConfigUtil.loadYaml(GuiShopRecoded.instance(), "tabs");
                     Set<String> categoryList = rootLevel.getKeys(false);
                     for (String categoryElement : categoryList) {
-                        //sender.sendMessage("Checking " + categoryElement);
                         FileConfiguration category = ConfigUtil.loadYaml(GuiShopRecoded.instance(), "tabs" + File.separator + categoryElement);
                         if (category != null) {
                             if (category.contains(args[1] + ".BuyPrice")) {
@@ -120,17 +124,20 @@ public class Cmds implements CommandExecutor {
                                 category.set(args[1] + ".BuyPrice", new Double(args[2]));
                                 category.set(args[1] + ".SellPrice", new Double(args[3]));
                                 try {
-                                    //PrintWriter out = new PrintWriter("tabs" + File.separator + categoryElement);
                                     PrintWriter out = new PrintWriter(GuiShopRecoded.getPluginDataFolder() + File.separator + "tabs" + File.separator + categoryElement + ".yml");
                                     out.println(category.saveToString());
                                     out.close();
                                     sender.sendMessage("§aUpdated " + args[1] + ": Buy $" + args[2] + ", Sell $" + args[3]);
+                                    found = true;
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                                 break;
                             }
                         }
+                    }
+                    if (!found) {
+                        sender.sendMessage("§aItem §6" + args[1] + " §anot found! Use item name §5(in parens) §afrom /shop");
                     }
                     return true;
                 }
@@ -176,6 +183,8 @@ public class Cmds implements CommandExecutor {
         sender.sendMessage("§a/shop");
         sender.sendMessage("§a/shop reload");
         sender.sendMessage("§a/shop setsale <tab_name> <sale in percentages> [sale_Reason] §6use \"_\" instead \" \"");
+        sender.sendMessage("§a/shop setprice <item> <buy price> <sell price>");
+        sender.sendMessage("  §a(Remember to do §6/shop reload §awhen finished.)");
     }
 
     public static void printTabs(CommandSender sender) {
