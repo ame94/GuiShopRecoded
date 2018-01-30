@@ -137,7 +137,7 @@ public class Cmds implements CommandExecutor {
                         }
                     }
                     if (!found) {
-                        sender.sendMessage("§aItem §6" + args[1] + " §anot found! Use item name §5(in parens) §afrom /shop");
+                        sender.sendMessage("§aItem §6" + args[1] + " §anot found! Use §5Item ID §afrom /shop");
                     }
                     return true;
                 }
