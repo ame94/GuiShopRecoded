@@ -1,8 +1,8 @@
 name: GuiShopRecoded
 main: ru.blc.guishop.GuiShopRecoded
 description: Just shop with gui for your server
-version: 1.5a
-author: Blc_Dragon
+version: 1.5b
+authors: [Blc_Dragon, ame94]
 website: https://dev.bukkit.org/projects/guishop-recoded
 softdepend: [Vault]
 
